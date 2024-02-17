@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    prometheus.io/port: http-metrics
+    prometheus.io/scrape: "true"
   name: httpserver-service
 spec:
   type: NodePort
   ports:
     - port: 8080
+      name: http-metrics
       targetPort: 8080
       nodePort: 30000
   selector:
